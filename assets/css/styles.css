@@ -112,7 +112,7 @@ pre code { background: none; padding: 0; color: inherit; }
      every page and build_nav.py keep their markup untouched; the "M" they still
      carry is aria-hidden already and is zeroed out here. When the vector file
      arrives, point the two image-set URLs at the .svg and nothing else moves. */
-  width: 39px; height: 46px; flex: 0 0 39px;
+  width: 78px; height: 92px; flex: 0 0 78px;
   background-image: -webkit-image-set(url(../img/mhg-stacked.png) 1x,
                                       url(../img/mhg-stacked@2x.png) 2x);
   background-image: image-set(url(../img/mhg-stacked.png) 1x,
@@ -123,6 +123,13 @@ pre code { background: none; padding: 0; color: inherit; }
 .brand__text { display: flex; flex-direction: column; line-height: 1.12; }
 .brand__name { font-family: var(--serif); font-size: 1.02rem; font-weight: 650; letter-spacing: -.015em; }
 .brand__sub { font-size: .655rem; letter-spacing: .13em; text-transform: uppercase; color: var(--ink-mute); font-weight: 600; }
+
+/* On a phone the brand, the wordmark and the Menu button have to share about
+   280px. At the full 78px the mark pushes Menu off the screen and the nav
+   becomes unreachable, so below 600px the mark goes back to its original size. */
+@media (max-width: 600px) {
+  .brand__mark { width: 39px; height: 46px; flex: 0 0 39px; }
+}
 
 .tabs { display: flex; gap: .15rem; margin-left: auto; align-items: center; }
 .tabs a {
