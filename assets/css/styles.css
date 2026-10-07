@@ -108,9 +108,17 @@ pre code { background: none; padding: 0; color: inherit; }
 .masthead__inner { display: flex; align-items: center; gap: 1.5rem; min-height: 4.05rem; }
 .brand { display: flex; align-items: center; gap: .7rem; text-decoration: none; flex: 0 0 auto; }
 .brand__mark {
-  width: 30px; height: 30px; flex: 0 0 30px; border-radius: 50%;
-  background: var(--ink); color: #fff; display: grid; place-items: center;
-  font-family: var(--serif); font-size: .82rem; font-weight: 700; letter-spacing: .02em;
+  /* The stacked MHG lockup. It is set as a background on the existing <span> so
+     every page and build_nav.py keep their markup untouched; the "M" they still
+     carry is aria-hidden already and is zeroed out here. When the vector file
+     arrives, point the two image-set URLs at the .svg and nothing else moves. */
+  width: 39px; height: 46px; flex: 0 0 39px;
+  background-image: -webkit-image-set(url(../img/mhg-stacked.png) 1x,
+                                      url(../img/mhg-stacked@2x.png) 2x);
+  background-image: image-set(url(../img/mhg-stacked.png) 1x,
+                              url(../img/mhg-stacked@2x.png) 2x);
+  background-repeat: no-repeat; background-position: center; background-size: contain;
+  font-size: 0;
 }
 .brand__text { display: flex; flex-direction: column; line-height: 1.12; }
 .brand__name { font-family: var(--serif); font-size: 1.02rem; font-weight: 650; letter-spacing: -.015em; }
