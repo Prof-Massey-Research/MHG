@@ -657,6 +657,10 @@ a.card:hover { border-color: var(--ink); transform: translateY(-2px); }
 .doctable--dd th, .doctable--dd td { width: 50%; }
 .doctable--sign td { width: 50%; padding-top: 1.4rem; }
 .blank { letter-spacing: .04em; color: var(--ink-mute); }
+/* Marks a bullet whose template is not built yet. */
+.soon { display: inline-block; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase;
+        font-weight: 650; color: var(--ink-mute); border: 1px solid var(--line-mid);
+        border-radius: 999px; padding: .1rem .5rem; margin-left: .35rem; vertical-align: .05em; }
 
 /* Local contacts: a grid of inputs that still reads as a table on paper. */
 .doctable--res td { padding: .4rem .45rem; vertical-align: top; }

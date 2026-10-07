@@ -6,6 +6,15 @@
    LiFEsports at The Ohio State University.
    https://thesportsinstitute.com/youth-sports-and-physical-activity-legislation-tracker/
 
+   Verified against state legislatures directly, October 2026, via a 48-state
+   sweep of the Open States API (openstates.org) filtered to bills matching both
+   a sport term and a mental-health term, with every hit then checked against the
+   state's own legislature page before being entered here. That sweep found the
+   tracker had missed CO SB26-060 and CA AB 1626 / AB 1665 / AB 1985, all 2026
+   laws, and NJ A 428 / S 1157. Candidates that did not survive checking are not
+   listed: PA SB 315 proved to be a career-and-technical-education funding bill,
+   and GA HB 1104 passed the Senate by substitute in 2024 but never completed.
+
    Topics pulled: Mental Health, Abuse, School Sports Coaching, Youth Sports
    Coaching. Bills the source marks "failed" are omitted. Where one bill is
    tagged under several topics it appears once, with the topics combined.
@@ -47,9 +56,16 @@ window.POLICY_DATA = {
     ]
   },
   CA: {
-    status: "baseline",
-    headline: "No mental-health-specific law. Related protections are in force.",
+    status: "enacted",
+    headline: "Coach behavioral and mental health training required by law.",
+    bills: [
+      { name: "AB 1626 (Gabriel)", stage: "Chaptered \u00b7 2026", topic: "Mental health \u00b7 School and youth sport coaching", summary: "Requires coach trainings to cover mental-health topics including trauma-informed care and strategies for creating a positive team culture. Directs the Department of Education, by 1 September 2027, to identify or develop a model youth athletics behavioral and mental health training for coaches in both recreational and competitive or club leagues, publish it, and work with local partners to disseminate it. Chapter 884.", link: "https://leginfo.legislature.ca.gov/faces/billStatusClient.xhtml?bill_id=202520260AB1626" },
+      { name: "AB 1985", stage: "Chaptered \u00b7 2026", topic: "Mental health \u00b7 School sport coaching", summary: "Student health: athletic coaches and trainers mental health training. Chaptered 30 September 2026 alongside AB 1626 and AB 1665.", link: "https://leginfo.legislature.ca.gov/faces/billStatusClient.xhtml?bill_id=202520260AB1985" },
+      { name: "AB 1665", stage: "Chaptered \u00b7 2026", topic: "Mental health \u00b7 School sport coaching", summary: "Companion measure on school athletics coach behavioral and mental health training. AB 1626\u2019s provisions were contingent on this bill also being enacted; both were chaptered on 30 September 2026.", link: "https://leginfo.legislature.ca.gov/faces/billStatusClient.xhtml?bill_id=202520260AB1665" }
+    ],
     related: [
+      { name: "AB 749", stage: "Pending \u00b7 2025", topic: "Youth sport \u00b7 Safety", summary: "Establishes a Blue Ribbon Commission to study the feasibility of a centralized California Department of Youth Sports. The commission would evaluate disparities in access, propose standardized coaching certifications, and report by January 1, 2027.", link: "https://legiscan.com/CA/bill/AB749/2025" },
+      { name: "AB 310", stage: "Pending \u00b7 2025", topic: "Cardiac arrest \u00b7 Youth sport coaching", summary: "Delays to January 1, 2028 the requirement that youth sports organizations provide access to an AED during practices and matches, requires all coaches to be certified in CPR and AED use, and mandates each organization adopt and annually review a written cardiac emergency response plan.", link: "https://legiscan.com/CA/bill/AB310/2025" },
       { name: "AB 506", stage: "Passed · 2021", topic: "Safeguarding & abuse · Youth sport coaching", summary: "Requires administrators, employees, and regular volunteers (18+) of youth service organizations including youth sports to undergo background checks, complete mandated reporter training, and adopt policies such as two-adult rule to prevent abuse.", link: "https://legiscan.com/CA/text/AB506/id/2433373" },
       { name: "Bus. & Prof. Code 18900 (2019)", stage: "Passed · 2019", topic: "Safeguarding & abuse · Youth sport coaching", summary: "Requires community youth athletic programs to provide written notice (e.g., on website) of their background-check policies for hired/volunteer coaches, including whether checks include state and federal records and subsequent arrest notifications.", link: "http://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=BPC&division=8.&title=&part=&chapter=2.7.&article=" },
       { name: "AB 245 / 35179.1", stage: "Passed · 2023", topic: "School sport coaching", summary: "Revises the High School Coaching Education & Training Program to require, by July-1, 2024, coach training in recognizing and responding to concussions, heat illness, and sudden cardiac arrest (including CPR and AED use), and mandates regular rehearsal of emergency action procedures.", link: "https://legiscan.com/CA/bill/AB245/2023" },
@@ -58,8 +74,11 @@ window.POLICY_DATA = {
     ]
   },
   CO: {
-    status: "baseline",
-    headline: "No mental-health-specific law. Related protections are in force.",
+    status: "enacted",
+    headline: "Coach mental health training required by law.",
+    bills: [
+      { name: "SB26-060", stage: "Became law \u00b7 2026", topic: "Mental health \u00b7 Youth sport coaching", summary: "Requires coaches of youth athletic activities to complete a biennial mental health education course covering a coach\u2019s impact on athlete mental health, a wellness framework for youth athletes, mental health disorders, trauma, substance abuse and suicide prevention. Where a youth athlete is removed from play for a suspected concussion, the coach or other designated personnel must advise the parent or guardian to seek a medical evaluation for appropriate medical and behavioral health guidance.", link: "https://leg.colorado.gov/bills/SB26-060" }
+    ],
     related: [
       { name: "SB24-113", stage: "Passed · 2024", topic: "Safeguarding & abuse · Youth sport coaching", summary: "Requires all youth sports organizations to ensure each coach completes annual mandatory reporter training and is encouraged to take abuse-prevention training covering prohibited conduct, boundaries, and responding to disclosures of abuse. Organizations must adopt a prohibited conduct policy and code of conduct for parents, coaches, athletes, and spectators, while all coaches (paid or volunteer in a coaching role) must undergo criminal history checks and cannot be hired if they have records of child abuse or sexual offenses. The law also directs the Department of Early Childhood to provide a model code of conduct and requires the Attorney General to prepare and distribute a notice of these requirements to be posted or shared with families.", link: "https://leg.colorado.gov/sites/default/files/documents/2024A/bills/2024a_113_rev.pdf" },
       { name: "SB11-040 / 25-43-103", stage: "Passed · 2011", topic: "School sport coaching · Youth sport coaching", summary: "Requires coaches to complete annual concussion education and mandates immediate removal of athletes suspected of concussion, prohibiting return until cleared by a licensed healthcare provider to protect youth athletes from brain injury risks.", link: "https://legiscan.com/CO/bill/SB040/2011" },
@@ -248,8 +267,11 @@ window.POLICY_DATA = {
     ]
   },
   NJ: {
-    status: "baseline",
-    headline: "No mental-health-specific law. Related protections are in force.",
+    status: "introduced",
+    headline: "Student-athlete mental health bill introduced and pending.",
+    bills: [
+      { name: "A 428 / S 1157", stage: "Introduced \u00b7 2026", topic: "Mental health \u00b7 School sport", summary: "Would establish student-athlete mental health specialists in school districts and public institutions of higher education, and create a student-athlete mental health programme. Introduced 13 January 2026 and referred to the Education Committees in both chambers; a version has been reintroduced each session since 2023.", link: "https://openstates.org/nj/bills/222/A428/" }
+    ],
     related: [
       { name: "A5872", stage: "Pending · 2025", topic: "Safeguarding & abuse · Youth sport coaching", summary: "Requires volunteers, employees, and organizers of certain youth and sports organizations to receive criminal history record background checks.", link: "https://www.njleg.state.nj.us/bill-search/2024/A5872" },
       { name: "A4983", stage: "Pending · 2024", topic: "School sport coaching", summary: "Requires the Commissioner of Education to create an eating disorder awareness training program for coaches and athletic trainers in interscholastic, cheer, dance, and collegiate sports. The program will cover risk factors, symptoms, prevention, and referral protocols, and must be completed initially within six months and then every two years. School districts and public colleges must also adopt policies to ensure staff know how to respond when a student-athlete may have an eating disorder.", link: "https://legiscan.com/NJ/bill/A4983/2024" },
@@ -375,6 +397,8 @@ window.POLICY_DATA = {
     status: "baseline",
     headline: "No mental-health-specific law. Related protections are in force.",
     related: [
+      { name: "HB 2420", stage: "Chaptered \u00b7 2025", topic: "Mental health \u00b7 Higher-education coaching", summary: "Requires every coach of an intercollegiate athletics programme at a public institution of higher education to complete Mental Health First Aid or a similar programme within one year of starting. Applies to colleges only, not to school or community youth sport \u2014 listed here because it is the nearest thing Virginia has to a coach mental health training mandate.", link: "https://openstates.org/va/bills/2025/HB2420/" },
+
       { name: "HB 1695 / 22.1-271.9", stage: "Passed · 2025", topic: "School sport coaching", summary: "Mandates that all public elementary and secondary schools develop and implement a Cardiac Emergency Response Plan (CERP) or an Athletic Emergency Action Plan (EAP). These plans must include establishing a cardiac emergency response team, integrating with local emergency services, conducting annual drills, and ensuring the availability and maintenance of Automated External Defibrillators (AEDs) at athletic venues.", link: "https://legiscan.com/VA/bill/HB1695/2025" }
     ]
   },

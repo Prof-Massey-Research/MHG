@@ -61,8 +61,8 @@ window.MHG_CHECKLIST = [
   {
     id: 'g3',
     number: '03',
-    title: 'Coach Development for Safe Environments',
-    statement: 'Programs require and support coaches to engage in ongoing development in methods that promote safe and supportive coaching.',
+    title: 'Coach Development for Supportive Coaching',
+    statement: 'Youth sport programs require and support their coaches to engage in ongoing coach development in methods that promote safe and supportive coaching.',
     href: 'guidelines/coach-development.html',
     stages: {
       foundational: [{ id: 'g3s1',
