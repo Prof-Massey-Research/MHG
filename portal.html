@@ -107,6 +107,12 @@
 <script src="assets/js/portal/ctrp-data.js"></script>
 <script src="assets/js/portal/docx.js"></script>
 <script src="assets/js/portal/store.js"></script>
+<!-- Supabase: the library, this project's public config, then the adapter.
+     The adapter replaces MHG_STORE only if both loaded, so a CDN failure
+     falls back to the local demo store rather than a blank portal. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="assets/js/portal/supabase-config.js"></script>
+<script src="assets/js/portal/store-supabase.js"></script>
 <script src="assets/js/portal/app.js"></script>
 </body>
 </html>

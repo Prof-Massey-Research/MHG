@@ -99,6 +99,29 @@
   }
 
   /* ---------- views ---------- */
+
+  /* True when the Supabase adapter is in play. The local demo adapter keeps
+     its username/password gate so the walkthrough still works offline. */
+  function isMagicLink() { return !!Store && Store.name === 'supabase'; }
+
+  /* Magic-link sign-in cannot return a session: the person leaves, opens their
+     email and comes back. This is the state in between. */
+  function linkSentView(email) {
+    return '' +
+    '<div class="portal-gate">' +
+      '<p class="eyebrow">Check your email</p>' +
+      '<h1>Your sign-in link is on its way</h1>' +
+      '<p class="muted" style="max-width:46ch">We sent a link to <strong>' + esc(email) +
+        '</strong>. Open it on this device and you will be signed in. It works once and expires.</p>' +
+      '<div class="portal-note">' +
+        '<p style="margin:0 0 .4rem">Nothing yet? Check spam and promotions folders \u2014 that is ' +
+          'where it usually is.</p>' +
+        '<p style="margin:0">If it still has not arrived, the address may not have been invited. ' +
+          '<a href="portal.html">Try a different address</a>.</p>' +
+      '</div>' +
+    '</div>';
+  }
+
   function signedOutView() {
     var wanted = requestedResource() === AUDIT_KEY;
     return '' +
@@ -110,21 +133,36 @@
           'interactive form kept inside your organization\u2019s portal. Sign in to open it.</p>'
         : '<p class="muted" style="max-width:46ch">Your organization\u2019s records are saved to ' +
           'your account, so they survive a cleared browser and follow you to another computer.</p>') +
-      '<form id="signin-form" class="portal-form">' +
-        '<label for="signin-user">Username</label>' +
-        '<input type="text" id="signin-user" name="username" autocomplete="username" required>' +
-        '<label for="signin-pass">Password</label>' +
-        '<input type="password" id="signin-pass" name="password" autocomplete="current-password" required>' +
-        '<button class="btn" type="submit">Sign in</button>' +
-      '</form>' +
+      (isMagicLink()
+        ? '<form id="signin-form" class="portal-form">' +
+            '<label for="signin-email">Email address</label>' +
+            '<input type="email" id="signin-email" name="email" autocomplete="email" ' +
+              'required placeholder="you@yourorganization.org">' +
+            '<button class="btn" type="submit">Email me a sign-in link</button>' +
+          '</form>'
+        : '<form id="signin-form" class="portal-form">' +
+            '<label for="signin-user">Username</label>' +
+            '<input type="text" id="signin-user" name="username" autocomplete="username" required>' +
+            '<label for="signin-pass">Password</label>' +
+            '<input type="password" id="signin-pass" name="password" autocomplete="current-password" required>' +
+            '<button class="btn" type="submit">Sign in</button>' +
+          '</form>') +
       '<p id="signin-error" class="portal-error" hidden role="alert"></p>' +
-      '<div class="portal-note">' +
-        '<p style="margin:0 0 .4rem"><strong>Demonstration only.</strong> Username <code>MHG</code>, ' +
-          'password <code>DEMO</code>.</p>' +
-        '<p style="margin:0">These credentials are checked in the browser, so this is a walkthrough ' +
-          'of the experience rather than real protection. The live version authenticates on the ' +
-          'server, with accounts created by invitation.</p>' +
-      '</div>' +
+      (isMagicLink()
+        ? '<div class="portal-note">' +
+            '<p style="margin:0 0 .4rem"><strong>There is no password.</strong> We email you a link ' +
+              'that signs you in.</p>' +
+            '<p style="margin:0">The link works once and then expires. Accounts are created by ' +
+              'invitation, so use the address your organization was invited with. Nothing about an ' +
+              'individual young person should be entered in this portal.</p>' +
+          '</div>'
+        : '<div class="portal-note">' +
+            '<p style="margin:0 0 .4rem"><strong>Demonstration only.</strong> Username <code>MHG</code>, ' +
+              'password <code>DEMO</code>.</p>' +
+            '<p style="margin:0">These credentials are checked in the browser, so this is a walkthrough ' +
+              'of the experience rather than real protection. The live version authenticates on the ' +
+              'server, with accounts created by invitation.</p>' +
+          '</div>') +
     '</div>';
   }
 
@@ -1289,6 +1327,22 @@
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var err = document.getElementById('signin-error');
+        if (err) err.hidden = true;
+
+        if (isMagicLink()) {
+          var emailEl = document.getElementById('signin-email');
+          var btn = form.querySelector('button[type="submit"]');
+          if (btn) { btn.disabled = true; btn.textContent = 'Sending\u2026'; }
+          Store.signIn(emailEl.value)
+            .then(function (r) { root.innerHTML = linkSentView(r.email); })
+            .catch(function (ex) {
+              if (btn) { btn.disabled = false; btn.textContent = 'Email me a sign-in link'; }
+              if (err) { err.textContent = ex.message; err.hidden = false; }
+              emailEl.focus();
+            });
+          return;
+        }
+
         Store.signIn(document.getElementById('signin-user').value,
                      document.getElementById('signin-pass').value)
           .then(load)
