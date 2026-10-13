@@ -22,7 +22,7 @@ window.MHG_CTRP = {
   header: [
     { id: 'org_name',    label: 'Organization / program', wide: true },
     { id: 'owner',       label: 'Protocol owner' },
-    { id: 'command',     label: 'Command centre / meeting location' },
+    { id: 'command',     label: 'Command center / meeting location' },
     { id: 'reviewed',    label: 'Last reviewed', type: 'date' },
     { id: 'next_review', label: 'Next review due', type: 'date' }
   ],
@@ -30,7 +30,7 @@ window.MHG_CTRP = {
   sections: [
     { n: 1, title: 'Purpose',
       blocks: [
-        { t: 'p', text: 'This protocol provides a framework for responding to collective traumatic events that affect multiple team members, families, or the broader community. Collective trauma requires a coordinated, trauma-informed response that recognises both individual and collective impact while promoting collective healing and resilience.' },
+        { t: 'p', text: 'This protocol provides a framework for responding to collective traumatic events that affect multiple team members, families, or the broader community. Collective trauma requires a coordinated, trauma-informed response that recognizes both individual and collective impact while promoting collective healing and resilience.' },
         { t: 'h', text: 'Events covered' },
         { t: 'ul', items: [
           'Death of a team member, coach, or community figure',
@@ -45,7 +45,7 @@ window.MHG_CTRP = {
           'Promote safety and stabilisation',
           'Foster connectedness and community support',
           'Provide hope and meaning',
-          'Honour cultural and community practices',
+          'Honor cultural and community practices',
           'Balance individual and collective needs'
         ] }
       ] },
@@ -74,7 +74,7 @@ window.MHG_CTRP = {
           'Contact crisis team members immediately.',
           'Schedule an emergency team meeting within two to four hours.',
           'Assign roles and responsibilities.',
-          'Establish the command centre or meeting location.'
+          'Establish the command center or meeting location.'
         ] },
         { t: 'h', text: 'Step 2 &mdash; Gather and verify facts' },
         { t: 'ul', items: [
@@ -163,7 +163,7 @@ window.MHG_CTRP = {
           'Gradually restore full practice intensity and competition.',
           'Maintain check-in routines but reduce their frequency.',
           'Continue to allow flexibility for athletes who are struggling.',
-          'Recognise that trauma is non-linear &mdash; ups and downs are normal.'
+          'Recognize that trauma is non-linear &mdash; ups and downs are normal.'
         ] },
         { t: 'h', text: 'Continue monitoring for' },
         { t: 'ul', items: [
@@ -181,12 +181,12 @@ window.MHG_CTRP = {
         { t: 'note', text: 'Coping varies, and the variation is normal. Some athletes will want to talk, some will want the ordinary structure of practice and nothing else, some will appear unaffected for weeks and then not be. None of these is the right or wrong response, and none of them should be read as a measure of how much someone cared.' },
 
         { t: 'h', text: 'Acknowledge what happened, plainly' },
-        { t: 'p', text: 'Ignoring or minimising the event leaves people to carry it alone. Name what happened in clear language rather than euphemism, within whatever the affected family has agreed may be said. Offer structured, voluntary sessions whose only purpose is to hear people &mdash; not to solve anything, and not to require anyone to speak.' },
+        { t: 'p', text: 'Ignoring or minimizing the event leaves people to carry it alone. Name what happened in clear language rather than euphemism, within whatever the affected family has agreed may be said. Offer structured, voluntary sessions whose only purpose is to hear people &mdash; not to solve anything, and not to require anyone to speak.' },
 
         { t: 'h', text: 'Restore a sense of safety and predictability' },
         { t: 'p', text: 'A collective event often disturbs an athlete\u2019s sense that their world is stable. Keep routines where you can, say clearly what will happen next and when, and follow through on it. Predictability does more for a grieving team than encouragement does.' },
 
-        { t: 'h', text: 'Recognise care without turning it into a performance' },
+        { t: 'h', text: 'Recognize care without turning it into a performance' },
         { t: 'p', text: 'Notice and thank the people who checked on others, or who quietly held things together. Do this without framing the period as a test the team passed, and without implying that those who needed more support gave less. Grief is not a contest, and recognition that sounds like ranking will land badly.' },
 
         { t: 'h', text: 'Let people find their own meaning, or none' },
@@ -204,7 +204,7 @@ window.MHG_CTRP = {
           'Obtain family permission for any memorial.',
           'Consider cultural and religious practices.',
           'Ensure memorials do not inadvertently glorify suicide or risky behavior.',
-          'Balance honouring memory with moving forward.',
+          'Balance honoring memory with moving forward.',
           'Consider permanence &mdash; what works now may not work in five or ten years.'
         ] },
         { t: 'h', text: 'Appropriate memorial options' },
@@ -214,7 +214,7 @@ window.MHG_CTRP = {
           'A service project reflecting the person’s values',
           'A memorial game or event, if appropriate',
           'A plaque or dedicated space, after careful consideration',
-          'A team tradition or ritual that honours the memory'
+          'A team tradition or ritual that honors the memory'
         ] },
         { t: 'h', text: 'Generally avoid' },
         { t: 'ul', items: [
@@ -245,7 +245,7 @@ window.MHG_CTRP = {
         { t: 'h', text: 'Natural disasters' },
         { t: 'ul', items: [
           'Assess which families and athletes were directly impacted, and address basic needs first.',
-          'Recognise ongoing stress from displacement, loss and rebuilding.',
+          'Recognize ongoing stress from displacement, loss and rebuilding.',
           'Sport can provide normalcy and community during recovery.',
           'Coordinate with broader community relief efforts, and allow displaced athletes to maintain team connection.'
         ] },
@@ -254,13 +254,13 @@ window.MHG_CTRP = {
           'Coordinate with law enforcement and community leaders.',
           'Address safety concerns directly and honestly.',
           'Be aware of media attention and protect athletes’ privacy.',
-          'Recognise the potential for community division, and affirm the team as a safe space for all members.',
+          'Recognize the potential for community division, and affirm the team as a safe space for all members.',
           'Consider the impact on athletes from targeted communities.'
         ] },
         { t: 'h', text: 'School-based traumatic events' },
         { t: 'ul', items: [
           'Coordinate closely with school administration and counselors, and follow the school’s crisis protocol.',
-          'Recognise that athletes may receive support at school and need consistency.',
+          'Recognize that athletes may receive support at school and need consistency.',
           'Sport can be a refuge or an additional stressor depending on circumstances.',
           'Ensure sport staff are informed of the school’s approach.'
         ] }
@@ -274,7 +274,7 @@ window.MHG_CTRP = {
         { t: 'p', text: 'Please do not discuss this with athletes or families until after our meeting; we need to coordinate our response and messaging. If you need immediate support, please contact {{staff_support_contact}}.' },
         { t: 'h', text: 'Template 2 &mdash; Family notification letter' },
         { t: 'p', text: 'Dear Families, It is with great sadness that I share [brief factual description of the event, in the words the family has agreed]. Our entire team community is grieving and we are committed to supporting our athletes and families during this difficult time.' },
-        { t: 'p', text: '<strong>What we are doing.</strong> Mental health counselors will be available at practice {{counselor_times}}. We are modifying practice schedules to allow time for processing and support. All coaches and staff are prepared to recognise signs of distress. We are coordinating with {{coordinating_org}} to provide comprehensive support.' },
+        { t: 'p', text: '<strong>What we are doing.</strong> Mental health counselors will be available at practice {{counselor_times}}. We are modifying practice schedules to allow time for processing and support. All coaches and staff are prepared to recognize signs of distress. We are coordinating with {{coordinating_org}} to provide comprehensive support.' },
         { t: 'p', text: '<strong>How you can help.</strong> Talk with your child about the event using age-appropriate language. Normalise a wide range of trauma-related reactions. Monitor for changes in behavior, sleep or eating. Reach out to us if you have concerns.' },
         { t: 'p', text: '<strong>Resources.</strong> 988 Suicide &amp; Crisis Lifeline &mdash; call or text 988. Crisis Text Line &mdash; text HELP to 741741. Local: {{local_resources}}.' },
         { t: 'p', text: 'We will continue to update you as our support plans develop. Please contact {{letter_contact}} with any questions or concerns.' }

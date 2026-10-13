@@ -75,7 +75,7 @@ window.MHG_MHEAP = {
         { t: 'ul', items: [
           '<strong>Do not leave the athlete alone.</strong>',
           'Stay calm and listen without judgment.',
-          'Take all statements seriously &mdash; do not minimise or dismiss concerns.',
+          'Take all statements seriously &mdash; do not minimize or dismiss concerns.',
           'Call 911 if the athlete has a plan or the means to harm themselves or others.',
           'Contact the Crisis Response Team member and mental health professional named in Section 1.',
           'Move the athlete to a private, safe location.',
@@ -88,18 +88,18 @@ window.MHG_MHEAP = {
         { t: 'ul', items: [
           'Believe the athlete and express support. Ensure immediate safety.',
           'Call 911 if the assault occurred within the past 72 hours or the athlete is in immediate danger.',
-          'Contact the Athletic Director or administrator, the school counselor or mental health professional, and the local sexual assault crisis centre.',
+          'Contact the Athletic Director or administrator, the school counselor or mental health professional, and the local sexual assault crisis center.',
           'Follow mandatory reporting requirements under local and state law.',
           'Preserve evidence if the assault was recent &mdash; do not shower or change clothes.',
           'Provide information about medical care and evidence collection.',
-          'Connect the athlete to specialised sexual assault support services.',
+          'Connect the athlete to specialized sexual assault support services.',
           'Document the disclosure, limited to the factual information disclosed.'
         ] },
 
         { t: 'h', text: 'Procedure C &mdash; Highly agitated or threatening behavior' },
         { t: 'note', text: 'If an athlete is highly agitated, violent, or threatening:' },
         { t: 'ul', items: [
-          'Prioritise the safety of all individuals. If the athlete poses immediate danger, call 911.',
+          'Prioritize the safety of all individuals. If the athlete poses immediate danger, call 911.',
           'Clear the area of other athletes and bystanders.',
           'Do not corner or trap the athlete. Maintain a safe distance and a calm demeanour.',
           'Use the de-escalation techniques in Section 6.',
@@ -206,7 +206,7 @@ window.MHG_MHEAP = {
           'Acute psychosis or severe mental health crisis',
           'Missing athlete with safety concerns'
         ] },
-        { t: 'h', text: 'Who is authorised to notify' },
+        { t: 'h', text: 'Who is authorized to notify' },
         { t: 'p', text: 'Name: {{notifier_name}} &nbsp; Title: {{notifier_title}} &nbsp; Phone: {{notifier_phone}}' },
         { t: 'h', text: 'Communicating beyond the family' },
         { t: 'p', text: 'Notifying a parent or guardian is an obligation. Telling anyone else is a decision, and it is the family\u2019s to make. Before any information reaches other staff, other athletes, other families or the public, agree with the family what may be said. Absent that agreement, share only what is operationally necessary for safety.' },
@@ -294,7 +294,7 @@ window.MHG_MHEAP = {
       '<strong>Document everything</strong> once the athlete is safe. Use objective language &mdash; exactly what was seen and heard, in quotes, not your interpretation.',
       '<strong>Follow up.</strong> Check that they got professional help.'
     ],
-    closing: 'You are not expected to solve the crisis. You are expected to recognise it, respond appropriately, and connect the athlete to professional help.',
+    closing: 'You are not expected to solve the crisis. You are expected to recognize it, respond appropriately, and connect the athlete to professional help.',
     contacts: [
       { fixed: '911 &mdash; immediate danger' },
       { fixed: '988 &mdash; Suicide &amp; Crisis Lifeline (call or text)' },

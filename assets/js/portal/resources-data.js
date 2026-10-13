@@ -38,7 +38,7 @@ window.MHG_RESOURCES = {
     { id: 'crisis', title: 'Local crisis response',
       note: 'Who comes out, or who to take an athlete to, when 988 is not enough on its own.',
       rows: 3,
-      hint: ['Mobile crisis team', 'Crisis stabilization or walk-in centre', 'Nearest ER with pediatric psychiatric capability'] },
+      hint: ['Mobile crisis team', 'Crisis stabilization or walk-in center', 'Nearest ER with pediatric psychiatric capability'] },
 
     { id: 'clinical', title: 'Clinical providers who see young people',
       note: 'Only list providers someone has actually contacted. Record what they take and how long the wait is — that is the part families need.',
@@ -48,7 +48,7 @@ window.MHG_RESOURCES = {
     { id: 'community', title: 'School and community',
       note: 'The people already connected to these young people.',
       rows: 3,
-      hint: ['School counsellor or psychologist', 'District mental health liaison', 'Community mental health centre'] },
+      hint: ['School counsellor or psychologist', 'District mental health liaison', 'Community mental health center'] },
 
     { id: 'internal', title: 'Inside our program',
       note: 'Who in this organization holds these roles, so nobody has to ask in a crisis.',

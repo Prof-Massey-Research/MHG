@@ -94,7 +94,7 @@
       return '<span class="battery__seg' + (i < stage ? ' is-on' : '') +
              '" title="' + esc(s.label) + '"></span>';
     }).join('');
-    return '<div class="battery" role="img" aria-label="Programme stage: ' +
+    return '<div class="battery" role="img" aria-label="Program stage: ' +
            esc(Ladder.stageName(stage)) + '">' + segs + '</div>';
   }
 
@@ -167,6 +167,29 @@
   }
 
   function needsOrgView() {
+    /* On the hosted build an account is put into an organisation by the
+       research team, and createOrg is denied by policy. Offering a "name your
+       organization" form here was a dead end: the only possible outcome was an
+       error telling the person they were not allowed to do the thing the page
+       had just invited them to do. */
+    if (isMagicLink()) {
+      return '' +
+      '<div class="portal-gate">' +
+        '<p class="eyebrow">Almost there</p>' +
+        '<h1>Your account is not linked to an organization yet</h1>' +
+        '<p class="muted" style="max-width:48ch">You are signed in, but records are kept against ' +
+          'an organization rather than a person, so there is nothing here until yours is ' +
+          'connected. The research team does that \u2014 it is a one-line change on their side.</p>' +
+        '<div class="portal-note">' +
+          '<p style="margin:0 0 .4rem"><strong>What to do:</strong> email the research team and ' +
+            'say which organization you belong to. Include the address you just signed in with, ' +
+            'since that is what gets linked.</p>' +
+          '<p style="margin:0">Once it is done, reload this page \u2014 you will not need to sign ' +
+            'in again.</p>' +
+        '</div>' +
+      '</div>';
+    }
+
     return '' +
     '<div class="portal-gate">' +
       '<p class="eyebrow">One more step</p>' +
@@ -219,7 +242,7 @@
       battery(stage) +
       '<p class="battery__label"><strong>' + esc(Ladder.stageName(stage)) + '</strong> &middot; ' +
         doneItems + ' of ' + totalItems + ' items recorded</p>' +
-      '<p class="muted" style="font-size:.85rem;max-width:56ch">Your programme reaches a stage once ' +
+      '<p class="muted" style="font-size:.85rem;max-width:56ch">Your program reaches a stage once ' +
         '<em>all seven</em> guidelines have reached it — breadth before depth, as the guide ' +
         'recommends. Individual guidelines may be further ahead.</p>' +
     '</section>' +
@@ -346,7 +369,7 @@
     not_in_place: 'Not in place'
   };
 
-  /* Anything not fully in place is what the organisation actually has to act on,
+  /* Anything not fully in place is what the organization actually has to act on,
      so the export ends with those rows gathered into one list. An audit that only
      records a score gives a board nothing to do; this gives them the work. */
   function auditGaps() {
@@ -640,7 +663,7 @@
   /* The finished policy, with every choice already made and every field filled.
      Both the Word export and (conceptually) the printed page are this same
      document; keeping the resolution in one place is what stops the two from
-     saying different things about what the organisation actually adopted. */
+     saying different things about what the organization actually adopted. */
   function adoptedLine() {
     var stamp = state.conduct._submitted && state.conduct._submitted.value;
     return stamp ? 'Adopted ' + fmtDate(stamp) : 'Draft \u2014 not yet adopted';
@@ -674,7 +697,7 @@
   }
 
   /* An unfilled detail becomes a rule to complete by hand, matching the print
-     behaviour rather than silently dropping the sentence's subject. */
+     behavior rather than silently dropping the sentence's subject. */
   function fillFields(text) {
     return text.replace(/\{\{(\w+)\}\}/g, function (_, id) {
       return cVal(id) || '__________________';
@@ -1265,7 +1288,7 @@
     Array.prototype.forEach.call(el.querySelectorAll('.battery__seg'), function (seg, i) {
       seg.classList.toggle('is-on', i < stage);
     });
-    el.setAttribute('aria-label', 'Programme stage: ' + Ladder.stageName(stage));
+    el.setAttribute('aria-label', 'Program stage: ' + Ladder.stageName(stage));
   }
 
   function updateProgress() {

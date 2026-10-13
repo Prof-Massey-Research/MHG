@@ -41,7 +41,7 @@ window.MHG_LADDER = (function () {
     return n === 0 ? 'Not yet at Foundational' : 'At ' + STAGES[n - 1].label;
   }
 
-  /* A programme reaches a stage only when ALL seven guidelines have reached it.
+  /* A program reaches a stage only when ALL seven guidelines have reached it.
      That follows the guide's own advice: go wide before you go deep. */
   function programStage(groups, isDone) {
     if (!groups.length) return 0;

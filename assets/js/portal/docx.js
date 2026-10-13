@@ -4,11 +4,11 @@
    A .docx is a ZIP of XML parts, so this needs no library: the ZIP entries are
    written with method 0 (stored), which Word accepts, and the only binary work
    is a CRC-32. Keeping it dependency-free matters here because the portal has
-   to keep working for partner organisations long after this build, and a CDN
+   to keep working for partner organizations long after this build, and a CDN
    that disappears would take the export with it.
 
    Word is the target rather than PDF because a code of conduct is a document an
-   organisation formally adopts: they need to add their letterhead, run it past a
+   organization formally adopts: they need to add their letterhead, run it past a
    board or an attorney, and re-save it. Page numbering also actually works here
    (PAGE / NUMPAGES fields), which browser print CSS cannot do.
 

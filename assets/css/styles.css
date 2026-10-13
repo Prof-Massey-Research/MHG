@@ -1147,7 +1147,7 @@ a.card:hover { border-color: var(--ink); transform: translateY(-2px); }
   }
 
   /* A scenario card runs to about a page and a half, so `break-inside: avoid`
-     cannot be honoured and the browser drops it — which is what made these
+     cannot be honored and the browser drops it — which is what made these
      split at arbitrary points. Instead each card claims a fresh sheet and its
      own parts are kept whole, so the one break inside a card falls between
      sections and the deck reads as a set of cards rather than a spill of text. */

@@ -1,12 +1,12 @@
 /* Supabase adapter for MHG_STORE.
  *
  * Implements exactly the same contract as the local adapter in store.js, so
- * app.js does not care which one is loaded. The only behavioural difference
+ * app.js does not care which one is loaded. The only behavioral difference
  * the UI must handle is sign-in: a magic link cannot return a session
  * synchronously, so signIn() resolves to { sent: true } and the session
  * arrives later, when the person follows the emailed link back to this page.
  *
- * Which organisation is "current" is kept in localStorage. That is a per-browser
+ * Which organization is "current" is kept in localStorage. That is a per-browser
  * convenience, not a security boundary — switching it cannot grant access,
  * because every query is still filtered by RLS against the caller's
  * memberships. A tampered value simply returns nothing.
@@ -71,7 +71,7 @@
       return Promise.resolve().then(function () {
         var addr = String(email || '').trim();
         if (!addr || addr.indexOf('@') < 1) {
-          throw new Error('Enter the email address your organisation was invited with.');
+          throw new Error('Enter the email address your organization was invited with.');
         }
         return db().auth.signInWithOtp({
           email: addr,
@@ -138,23 +138,23 @@
 
     /* --- organizations ------------------------------------------------ */
 
-    /* RLS already restricts this to organisations the caller belongs to, so
+    /* RLS already restricts this to organizations the caller belongs to, so
        no client-side filtering is needed or trusted. */
     listOrgs: function () {
       return db().from('organizations').select('id,slug,name,url,created_at')
         .order('name', { ascending: true })
         .then(function (res) {
-          fail(res.error, 'Could not load your organisations.');
+          fail(res.error, 'Could not load your organizations.');
           return res.data || [];
         });
     },
 
-    /* Denied by policy: this is a closed pilot and organisations are seeded by
+    /* Denied by policy: this is a closed pilot and organizations are seeded by
        the research team. See the commented-out org_insert policy in
        supabase/01-schema.sql if that ever changes. */
     createOrg: function () {
       return Promise.reject(new Error(
-        'Organisations are set up by the research team. Contact them to add one.'));
+        'Organizations are set up by the research team. Contact them to add one.'));
     },
 
     switchOrg: function (orgId) {

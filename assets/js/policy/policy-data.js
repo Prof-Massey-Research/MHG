@@ -270,7 +270,7 @@ window.POLICY_DATA = {
     status: "introduced",
     headline: "Student-athlete mental health bill introduced and pending.",
     bills: [
-      { name: "A 428 / S 1157", stage: "Introduced \u00b7 2026", topic: "Mental health \u00b7 School sport", summary: "Would establish student-athlete mental health specialists in school districts and public institutions of higher education, and create a student-athlete mental health programme. Introduced 13 January 2026 and referred to the Education Committees in both chambers; a version has been reintroduced each session since 2023.", link: "https://openstates.org/nj/bills/222/A428/" }
+      { name: "A 428 / S 1157", stage: "Introduced \u00b7 2026", topic: "Mental health \u00b7 School sport", summary: "Would establish student-athlete mental health specialists in school districts and public institutions of higher education, and create a student-athlete mental health program. Introduced 13 January 2026 and referred to the Education Committees in both chambers; a version has been reintroduced each session since 2023.", link: "https://openstates.org/nj/bills/222/A428/" }
     ],
     related: [
       { name: "A5872", stage: "Pending · 2025", topic: "Safeguarding & abuse · Youth sport coaching", summary: "Requires volunteers, employees, and organizers of certain youth and sports organizations to receive criminal history record background checks.", link: "https://www.njleg.state.nj.us/bill-search/2024/A5872" },
@@ -397,7 +397,7 @@ window.POLICY_DATA = {
     status: "baseline",
     headline: "No mental-health-specific law. Related protections are in force.",
     related: [
-      { name: "HB 2420", stage: "Chaptered \u00b7 2025", topic: "Mental health \u00b7 Higher-education coaching", summary: "Requires every coach of an intercollegiate athletics programme at a public institution of higher education to complete Mental Health First Aid or a similar programme within one year of starting. Applies to colleges only, not to school or community youth sport \u2014 listed here because it is the nearest thing Virginia has to a coach mental health training mandate.", link: "https://openstates.org/va/bills/2025/HB2420/" },
+      { name: "HB 2420", stage: "Chaptered \u00b7 2025", topic: "Mental health \u00b7 Higher-education coaching", summary: "Requires every coach of an intercollegiate athletics program at a public institution of higher education to complete Mental Health First Aid or a similar program within one year of starting. Applies to colleges only, not to school or community youth sport \u2014 listed here because it is the nearest thing Virginia has to a coach mental health training mandate.", link: "https://openstates.org/va/bills/2025/HB2420/" },
 
       { name: "HB 1695 / 22.1-271.9", stage: "Passed · 2025", topic: "School sport coaching", summary: "Mandates that all public elementary and secondary schools develop and implement a Cardiac Emergency Response Plan (CERP) or an Athletic Emergency Action Plan (EAP). These plans must include establishing a cardiac emergency response team, integrating with local emergency services, conducting annual drills, and ensuring the availability and maintenance of Automated External Defibrillators (AEDs) at athletic venues.", link: "https://legiscan.com/VA/bill/HB1695/2025" }
     ]

@@ -24,7 +24,11 @@
     var h = el.innerHTML || '';
     return h
       .replace(/<br\s*\/?>/gi, ' ')
-      .replace(/<\/?(a|span|small|code)\b[^>]*>/gi, '')
+      /* A space, not nothing: these tags often sit directly against the next
+         one, and stripping them bare joined the words either side -- which is
+         what produced "words mushed together" in the exported tables. The
+         \s+ collapse below tidies up any doubles this introduces. */
+      .replace(/<\/?(a|span|small|code)\b[^>]*>/gi, ' ')
       .replace(/<[^>]*>/g, function (t) {
         return /^<\/?(strong|b|em|i)\b/i.test(t) ? t : '';
       })
@@ -98,6 +102,33 @@
         if (tb) blocks.push(tb);
       } else if (tag === 'blockquote') {
         blocks.push({ t: 'principle', html: inline(el) });
+      } else if (tag === 'pre') {
+        /* There was no branch for <pre>, so the walker recursed into <code>,
+           found no child elements and emitted nothing -- the Get Help widget's
+           snippet was simply absent from the Word file. One row per line keeps
+           the line breaks, which paragraphs would lose. */
+        var code = (el.textContent || '').replace(/\r/g, '').split('\n');
+        while (code.length && !code[code.length - 1].trim()) code.pop();
+        if (code.length) {
+          blocks.push({ t: 'table', cols: [PAGE], head: null,
+                        rows: code.map(function (line) { return [{ text: line }]; }) });
+        }
+      } else if (el.classList.contains('field')) {
+        /* A .field is a label plus a ruled blank. The walker recursed in, found
+           two <span>s it had no branch for, and emitted nothing -- so headings
+           like "Designation record" arrived in Word with every blank missing.
+           Consecutive fields are merged into one table so they read as a form. */
+        var kids  = el.children;
+        var label = kids.length ? txt(kids[0]) : txt(el);
+        var value = kids.length > 1 ? txt(kids[1]) : '';
+        var prev  = blocks[blocks.length - 1];
+        if (prev && prev._fields) {
+          prev.rows.push([{ text: label }, { text: value }]);
+        } else {
+          blocks.push({ t: 'table', _fields: true,
+                        cols: [Math.round(PAGE * 0.38), PAGE - Math.round(PAGE * 0.38)],
+                        head: null, rows: [[{ text: label }, { text: value }]] });
+        }
       } else if (depth < 8) {
         walk(el, blocks, depth + 1);      /* wrappers: .doc, .panel, .grid, … */
       }

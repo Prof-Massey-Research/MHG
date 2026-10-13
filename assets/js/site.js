@@ -1,4 +1,4 @@
-/* Shared site behaviour: mobile nav, scroll-spy sidebar, toolbox filters. */
+/* Shared site behavior: mobile nav, scroll-spy sidebar, toolbox filters. */
 (function () {
   'use strict';
 
