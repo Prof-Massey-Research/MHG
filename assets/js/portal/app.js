@@ -89,13 +89,18 @@
   }
 
   /* ---------- battery bar ---------- */
-  function battery(stage) {
-    var segs = Ladder.STAGES.map(function (s, i) {
-      return '<span class="battery__seg' + (i < stage ? ' is-on' : '') +
-             '" title="' + esc(s.label) + '"></span>';
-    }).join('');
-    return '<div class="battery" role="img" aria-label="Program stage: ' +
-           esc(Ladder.stageName(stage)) + '">' + segs + '</div>';
+  /* Takes a 0..1 fraction rather than a stage number: guidelines have between
+     two and six steps, so there is no fixed set of tiers to light up. The bar
+     is five segments purely as a visual scale. */
+  var BAR_SEGS = 5;
+  function battery(frac) {
+    var on = Math.round(Math.max(0, Math.min(1, frac)) * BAR_SEGS);
+    var segs = '';
+    for (var i = 0; i < BAR_SEGS; i++) {
+      segs += '<span class="battery__seg' + (i < on ? ' is-on' : '') + '"></span>';
+    }
+    return '<div class="battery" role="img" aria-label="' +
+           esc(Ladder.progressName(frac)) + '">' + segs + '</div>';
   }
 
   /* ---------- views ---------- */
@@ -207,7 +212,7 @@
   }
 
   function dashboardView() {
-    var stage = Ladder.programStage(GROUPS, done);
+    var frac = Ladder.programFraction(GROUPS, done);
     var totalItems = 0, doneItems = 0;
     GROUPS.forEach(function (g) {
       var items = Ladder.allItems(g);
@@ -239,18 +244,19 @@
     '<section class="portal-hero">' +
       '<p class="eyebrow">Your progress</p>' +
       '<h1>' + esc(state.session.org.name) + '</h1>' +
-      battery(stage) +
-      '<p class="battery__label"><strong>' + esc(Ladder.stageName(stage)) + '</strong> &middot; ' +
-        doneItems + ' of ' + totalItems + ' items recorded</p>' +
-      '<p class="muted" style="font-size:.85rem;max-width:56ch">Your program reaches a stage once ' +
-        '<em>all seven</em> guidelines have reached it — breadth before depth, as the guide ' +
-        'recommends. Individual guidelines may be further ahead.</p>' +
+      battery(frac) +
+      '<p class="battery__label"><strong>' + esc(Ladder.progressName(frac)) + '</strong> &middot; ' +
+        doneItems + ' of ' + totalItems + ' steps recorded</p>' +
+      '<p class="muted" style="font-size:.85rem;max-width:56ch">The bar moves at the pace of your ' +
+        'least-advanced guideline &mdash; breadth before depth, as the guide recommends. ' +
+        'Individual guidelines may be much further ahead.</p>' +
     '</section>' +
 
     '<section class="portal-section">' +
       '<h2>Your ladder</h2>' +
-      '<p class="muted" style="font-size:.88rem;max-width:60ch">Open a guideline to see its five ' +
-        'stages. Where a template evidences a stage, it sits alongside it.</p>';
+      '<p class="muted" style="font-size:.88rem;max-width:60ch">Open a guideline to see its ' +
+        'implementation steps, in the same order as the guideline page. Where a template ' +
+        'evidences a step, it sits alongside it.</p>';
 
     GROUPS.forEach(function (g) { html += guidelineCard(g); });
 
@@ -264,43 +270,38 @@
   function guidelineCard(g) {
     var items = Ladder.allItems(g);
     var d = items.filter(function (i) { return done(i.id); }).length;
-    var gs = Ladder.stageOf(g, done);
+    var gf = Ladder.fractionOf(g, done);
 
     var html = '<details class="gcard" data-guideline="' + esc(g.id) + '">' +
       '<summary class="gcard__head">' +
         '<span class="gcard__no">' + esc(g.number) + '</span>' +
         '<span class="gcard__name">' + esc(g.title) + '</span>' +
-        '<span class="gcard__bar">' + battery(gs) + '</span>' +
-        '<span class="gcard__stage">' + esc(Ladder.stageName(gs)) + '</span>' +
+        '<span class="gcard__bar">' + battery(gf) + '</span>' +
+        '<span class="gcard__stage">' + esc(Ladder.progressText(g, done)) + '</span>' +
         '<span class="gcard__count">' + d + '/' + items.length + '</span>' +
       '</summary>' +
       '<div class="gcard__body">' +
         '<p class="muted" style="font-size:.86rem;margin-bottom:1.2rem">' + esc(g.statement) +
           ' <a href="' + esc(g.href) + '" style="white-space:nowrap">Read the guideline &rarr;</a></p>';
 
-    Ladder.STAGES.forEach(function (st, si) {
-      var list = g.stages[st.key] || [];
-      if (!list.length) return;
-      html += '<div class="ck-rung"><p class="ck-rung__label">' +
-              '<span class="ck-rung__n">Stage ' + (si + 1) + '</span>' + esc(st.label) +
-              (st.sub ? ' <span class="ck-rung__sub">' + esc(st.sub) + '</span>' : '') +
-              '</p><ul class="ck-items">';
-      list.forEach(function (item) {
-        var r = state.responses[item.id];
-        var meta = (r && r.value && r.updated_by)
-          ? '<span class="ck-item__meta">Recorded by ' + esc(r.updated_by) +
-            (r.updated_at ? ' &middot; ' + esc(fmtDate(r.updated_at)) : '') + '</span>'
-          : '';
-        html += '<li class="ck-item"><label>' +
-          '<input type="checkbox" data-item="' + esc(item.id) + '"' +
-          (done(item.id) ? ' checked' : '') + '>' +
-          '<span><span class="ck-item__text">' + esc(item.text) + '</span>' +
-          (item.note ? '<span class="ck-item__note">' + esc(item.note) + '</span>' : '') +
-          meta +
-          '</span></label>' + toolsHTML(item) + '</li>';
-      });
-      html += '</ul></div>';
+    /* One ordered list, mirroring the guideline page. Only the two ends are
+       named: where you start, and where it leads. */
+    html += '<p class="ck-rung__label">' + esc(Ladder.START_LABEL) + '</p><ul class="ck-items">';
+    items.forEach(function (item) {
+      var r = state.responses[item.id];
+      var meta = (r && r.value && r.updated_by)
+        ? '<span class="ck-item__meta">Recorded by ' + esc(r.updated_by) +
+          (r.updated_at ? ' &middot; ' + esc(fmtDate(r.updated_at)) : '') + '</span>'
+        : '';
+      html += '<li class="ck-item"><label>' +
+        '<input type="checkbox" data-item="' + esc(item.id) + '"' +
+        (done(item.id) ? ' checked' : '') + '>' +
+        '<span><span class="ck-item__text">' + esc(item.text) + '</span>' +
+        (item.note ? '<span class="ck-item__note">' + esc(item.note) + '</span>' : '') +
+        meta +
+        '</span></label>' + toolsHTML(item) + '</li>';
     });
+    html += '</ul><p class="ck-rung__label ck-rung__end">' + esc(Ladder.END_LABEL) + '</p>';
 
     return html + '</div></details>';
   }
@@ -1283,16 +1284,17 @@
 
   /* Patch only the nodes that depend on progress. Re-rendering the whole
      dashboard on every tick would destroy keyboard focus mid-list. */
-  function paintBattery(el, stage) {
+  function paintBattery(el, frac) {
     if (!el) return;
+    var on = Math.round(Math.max(0, Math.min(1, frac)) * BAR_SEGS);
     Array.prototype.forEach.call(el.querySelectorAll('.battery__seg'), function (seg, i) {
-      seg.classList.toggle('is-on', i < stage);
+      seg.classList.toggle('is-on', i < on);
     });
-    el.setAttribute('aria-label', 'Program stage: ' + Ladder.stageName(stage));
+    el.setAttribute('aria-label', Ladder.progressName(frac));
   }
 
   function updateProgress() {
-    var stage = Ladder.programStage(GROUPS, done);
+    var frac = Ladder.programFraction(GROUPS, done);
     var total = 0, count = 0;
     GROUPS.forEach(function (g) {
       var items = Ladder.allItems(g);
@@ -1300,11 +1302,11 @@
       count += items.filter(function (i) { return done(i.id); }).length;
     });
 
-    paintBattery(root.querySelector('.portal-hero .battery'), stage);
+    paintBattery(root.querySelector('.portal-hero .battery'), frac);
     var label = root.querySelector('.battery__label');
     if (label) {
-      label.innerHTML = '<strong>' + esc(Ladder.stageName(stage)) + '</strong> &middot; ' +
-                        count + ' of ' + total + ' items recorded';
+      label.innerHTML = '<strong>' + esc(Ladder.progressName(frac)) + '</strong> &middot; ' +
+                        count + ' of ' + total + ' steps recorded';
     }
 
     GROUPS.forEach(function (g) {
@@ -1312,9 +1314,8 @@
       if (!card) return;
       var items = Ladder.allItems(g);
       var d = items.filter(function (x) { return done(x.id); }).length;
-      var gs = Ladder.stageOf(g, done);
-      paintBattery(card.querySelector('.gcard__bar .battery'), gs);
-      card.querySelector('.gcard__stage').textContent = Ladder.stageName(gs);
+      paintBattery(card.querySelector('.gcard__bar .battery'), Ladder.fractionOf(g, done));
+      card.querySelector('.gcard__stage').textContent = Ladder.progressText(g, done);
       card.querySelector('.gcard__count').textContent = d + '/' + items.length;
     });
   }

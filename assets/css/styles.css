@@ -395,6 +395,19 @@ pre code { background: none; padding: 0; color: inherit; }
    wordmark at the same height, so they get their own, larger cap. */
 .panel-logo--lg { max-height: 84px; max-width: 168px; }
 
+/* The panel shown as names rather than logos. The logo wall is held in
+   archive/homepage-panel-logos-REMOVED.html until every organisation has
+   agreed to their mark being used; the markup there drops straight back in.
+   Columns rather than a long single list, so nineteen names stay scannable. */
+.panel-people {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 1.15rem 2.4rem;
+  grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+}
+.panel-people li { margin: 0; display: flex; flex-direction: column; line-height: 1.3; }
+.ppl__name { font-family: var(--serif); font-size: 1.02rem; font-weight: 650; letter-spacing: -.01em; }
+.ppl__org  { font-size: .8rem; color: var(--ink-mute); margin-top: .12rem; }
+
 @media (max-width: 560px) {
   .panel-logos { gap: 1.5rem 1.8rem; }
   .panel-logo { max-height: 46px; max-width: 124px; }
@@ -574,6 +587,18 @@ a.card:hover { border-color: var(--ink); transform: translateY(-2px); }
 .rung__no { font-family: var(--serif); font-size: .95rem; color: var(--ink-faint); }
 .rung h3 { margin: .35rem 0 .5rem; }
 .rung p { font-size: .9rem; color: var(--ink-soft); margin: 0; }
+
+/* Only the first and last cards are named. The three between show a small
+   meter instead of a heading: further right, more segments filled. It conveys
+   "further along" without grading the organisation as Developing or Advanced,
+   which described the program rather than the work. */
+.rung__meter { display: flex; gap: 3px; margin: .5rem 0 .75rem; }
+.rung__meter i {
+  width: 14px; height: 4px; border-radius: 2px;
+  background: var(--line-mid); display: block;
+}
+.rung__meter i.is-on { background: var(--ink); }
+.rung--named .rung__meter { display: none; }
 
 .lmatrix { width: 100%; border-collapse: collapse; font-size: .875rem; }
 .lmatrix th, .lmatrix td { text-align: left; vertical-align: top; padding: 1rem .9rem; border-bottom: 1px solid var(--line); }
@@ -771,6 +796,16 @@ a.card:hover { border-color: var(--ink); transform: translateY(-2px); }
 }
 .ck-rung__sub { letter-spacing: .06em; font-weight: 500; color: var(--ink-faint); text-transform: none; }
 .ck-rung__label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+/* Only the first and last groups are named. The unnamed ones in between get a
+   short rule instead of a heading, so the list still reads as moving forward
+   without grading the organisation at each step. */
+.ck-rung--unnamed { margin-top: .45rem; }
+.ck-rung__label--quiet {
+  margin-bottom: .3rem; height: 1px; gap: 0;
+  background: linear-gradient(to right, var(--line) 0 2.4rem, transparent 2.4rem);
+}
+.ck-rung__label--quiet::after { content: none; }
 
 .ck-items { list-style: none; padding: 0; margin: 0; }
 .ck-item { margin: 0; border-bottom: 1px solid var(--line); }

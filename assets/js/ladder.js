@@ -1,60 +1,67 @@
 /* ==========================================================================
-   Shared implementation-ladder logic.
+   Shared implementation logic.
 
-   The five stages and the rule for deciding which stage something has reached
-   live here so the public checklist and the partner portal cannot drift apart.
+   Each guideline has an ordered list of steps, mirroring the "Implementation
+   protocol" on its page. Progress is how many of those steps are done.
+
+   This replaced a five-stage model (Foundational / Developing / Established /
+   Advanced / Sustained). Two problems with it: the guidelines have between two
+   and six steps each, so five buckets were invented structure that some
+   guidelines could never fill; and the tier names graded the organisation
+   rather than describing the work. Only the two ends are named now — where you
+   start, and where it leads — and everything between is expressed as distance
+   travelled. The old version is at archive/checklist-data-5stage-REMOVED.js.
    ========================================================================== */
 window.MHG_LADDER = (function () {
   'use strict';
 
-  var STAGES = [
-    { key: 'foundational', label: 'Foundational', sub: 'Starting point' },
-    { key: 'developing',   label: 'Developing',   sub: 'Building momentum' },
-    { key: 'established',  label: 'Established',  sub: 'Expanding implementation' },
-    { key: 'advanced',     label: 'Advanced',     sub: 'Integrated practice' },
-    { key: 'sustained',    label: 'Long-term sustainability', sub: '' }
-  ];
+  var START_LABEL = 'Start here';
+  var END_LABEL   = 'Long-term sustainability';
 
-  /* Every item in a guideline, in stage order. */
-  function allItems(group) {
-    return STAGES.reduce(function (acc, s) {
-      return acc.concat(group.stages[s.key] || []);
-    }, []);
+  function allItems(group) { return group.steps || []; }
+
+  function doneCount(group, isDone) {
+    return allItems(group).filter(function (s) { return isDone(s.id); }).length;
   }
 
-  /* A guideline has reached a stage when that stage — and every stage below it —
-     is complete. The ladder is cumulative, so a gap stops the count. */
-  function stageOf(group, isDone) {
-    var reached = 0;
-    for (var i = 0; i < STAGES.length; i++) {
-      var list = group.stages[STAGES[i].key] || [];
-      if (list.length && list.every(function (item) { return isDone(item.id); })) {
-        reached = i + 1;
-      } else {
-        break;
-      }
-    }
-    return reached;
+  function total(group) { return allItems(group).length; }
+
+  /* 0..1 — how far this guideline has moved toward long-term sustainability. */
+  function fractionOf(group, isDone) {
+    var t = total(group);
+    return t ? doneCount(group, isDone) / t : 0;
   }
 
-  function stageName(n) {
-    return n === 0 ? 'Not yet at Foundational' : 'At ' + STAGES[n - 1].label;
-  }
-
-  /* A program reaches a stage only when ALL seven guidelines have reached it.
+  /* The program as a whole moves at the pace of its least-advanced guideline.
      That follows the guide's own advice: go wide before you go deep. */
-  function programStage(groups, isDone) {
+  function programFraction(groups, isDone) {
     if (!groups.length) return 0;
     return groups.reduce(function (min, g) {
-      return Math.min(min, stageOf(g, isDone));
-    }, STAGES.length);
+      return Math.min(min, fractionOf(g, isDone));
+    }, 1);
+  }
+
+  /* Describes movement rather than assigning a tier. */
+  function progressName(frac) {
+    if (frac <= 0)   return 'Not yet started';
+    if (frac >= 1)   return END_LABEL;
+    if (frac < 0.34) return 'Foundations in place';
+    return 'Building toward long-term sustainability';
+  }
+
+  function progressText(group, isDone) {
+    return doneCount(group, isDone) + ' of ' + total(group);
   }
 
   return {
-    STAGES: STAGES,
+    START_LABEL: START_LABEL,
+    END_LABEL: END_LABEL,
     allItems: allItems,
-    stageOf: stageOf,
-    stageName: stageName,
-    programStage: programStage
+    total: total,
+    doneCount: doneCount,
+    fractionOf: fractionOf,
+    programFraction: programFraction,
+    progressName: progressName,
+    progressText: progressText
   };
 })();
