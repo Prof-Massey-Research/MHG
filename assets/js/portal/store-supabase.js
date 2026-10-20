@@ -76,6 +76,9 @@
         return db().auth.signInWithOtp({
           email: addr,
           options: {
+            /* The email template uses {{ .Token }}, so Supabase sends a code
+               rather than a link and this redirect is never used. Kept so the
+               flow still works if the template is ever switched back. */
             emailRedirectTo: window.location.origin + window.location.pathname,
             /* Invitation-only: do not create an account for an address that
                was never invited. Without this, anyone could sign themselves
@@ -94,6 +97,29 @@
           }
           return { sent: true, email: addr };
         });
+      });
+    },
+
+    /* Exchange the six-digit code for a session.
+       type must be 'email' for a code. 'magiclink' is for the link form and
+       fails against a numeric token with an expired-link error, which is a
+       confusing thing to show someone who has just typed the right code. */
+    verifyCode: function (email, code) {
+      return Promise.resolve().then(function () {
+        var addr = String(email || '').trim();
+        var tok  = String(code || '').replace(/\s+/g, '');
+        if (!/^[0-9]{6}$/.test(tok)) throw new Error('Enter the six-digit code from the email.');
+        return db().auth.verifyOtp({ email: addr, token: tok, type: 'email' })
+          .then(function (res) {
+            if (res.error) {
+              var m = String(res.error.message || '');
+              if (/expired|invalid/i.test(m)) {
+                throw new Error('That code has expired or is not right. Request a new one.');
+              }
+              throw new Error(m || 'Could not verify the code.');
+            }
+            return SupabaseAdapter.getSession();
+          });
       });
     },
 

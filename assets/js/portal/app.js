@@ -111,18 +111,31 @@
 
   /* Magic-link sign-in cannot return a session: the person leaves, opens their
      email and comes back. This is the state in between. */
-  function linkSentView(email) {
+  /* After the code is sent. Partners type the six digits here rather than
+     following a link: corporate mail scanners click links to vet them, which
+     consumes a single-use magic link before the person ever sees it, and they
+     are then told it has expired. A code has no URL to scan. */
+  function codeSentView(email) {
     return '' +
     '<div class="portal-gate">' +
       '<p class="eyebrow">Check your email</p>' +
-      '<h1>Your sign-in link is on its way</h1>' +
-      '<p class="muted" style="max-width:46ch">We sent a link to <strong>' + esc(email) +
-        '</strong>. Open it on this device and you will be signed in. It works once and expires.</p>' +
+      '<h1>Enter your sign-in code</h1>' +
+      '<p class="muted" style="max-width:46ch">We sent a six-digit code to <strong>' +
+        esc(email) + '</strong>. It is valid for one hour.</p>' +
+      '<form id="code-form" class="portal-form">' +
+        '<label for="code-input">Six-digit code</label>' +
+        '<input type="text" id="code-input" name="code" inputmode="numeric" ' +
+          'autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required ' +
+          'placeholder="123456" style="letter-spacing:.35em;font-size:1.1rem">' +
+        '<input type="hidden" id="code-email" value="' + esc(email) + '">' +
+        '<button class="btn" type="submit">Sign in</button>' +
+      '</form>' +
+      '<p id="code-error" class="portal-error" hidden role="alert"></p>' +
       '<div class="portal-note">' +
-        '<p style="margin:0 0 .4rem">Nothing yet? Check spam and promotions folders \u2014 that is ' +
-          'where it usually is.</p>' +
-        '<p style="margin:0">If it still has not arrived, the address may not have been invited. ' +
-          '<a href="portal.html">Try a different address</a>.</p>' +
+        '<p style="margin:0 0 .4rem">Nothing yet? Check spam and promotions \u2014 that is ' +
+          'usually where it is.</p>' +
+        '<p style="margin:0"><a href="portal.html">Request a new code</a> if it has been ' +
+          'more than an hour, or to use a different address.</p>' +
       '</div>' +
     '</div>';
   }
@@ -143,7 +156,7 @@
             '<label for="signin-email">Email address</label>' +
             '<input type="email" id="signin-email" name="email" autocomplete="email" ' +
               'required placeholder="you@yourorganization.org">' +
-            '<button class="btn" type="submit">Email me a sign-in link</button>' +
+            '<button class="btn" type="submit">Email me a sign-in code</button>' +
           '</form>'
         : '<form id="signin-form" class="portal-form">' +
             '<label for="signin-user">Username</label>' +
@@ -157,7 +170,7 @@
         ? '<div class="portal-note">' +
             '<p style="margin:0 0 .4rem"><strong>There is no password.</strong> We email you a link ' +
               'that signs you in.</p>' +
-            '<p style="margin:0">The link works once and then expires. Accounts are created by ' +
+            '<p style="margin:0">The code works once and expires after an hour. Accounts are created by ' +
               'invitation, so use the address your organization was invited with. Nothing about an ' +
               'individual young person should be entered in this portal.</p>' +
           '</div>'
@@ -1358,9 +1371,9 @@
           var btn = form.querySelector('button[type="submit"]');
           if (btn) { btn.disabled = true; btn.textContent = 'Sending\u2026'; }
           Store.signIn(emailEl.value)
-            .then(function (r) { root.innerHTML = linkSentView(r.email); })
+            .then(function (r) { root.innerHTML = codeSentView(r.email); bind(); })
             .catch(function (ex) {
-              if (btn) { btn.disabled = false; btn.textContent = 'Email me a sign-in link'; }
+              if (btn) { btn.disabled = false; btn.textContent = 'Email me a sign-in code'; }
               if (err) { err.textContent = ex.message; err.hidden = false; }
               emailEl.focus();
             });
@@ -1374,6 +1387,26 @@
             if (err) { err.textContent = ex.message; err.hidden = false; }
             document.getElementById('signin-pass').value = '';
             document.getElementById('signin-pass').focus();
+          });
+      });
+    }
+
+    var codeForm = document.getElementById('code-form');
+    if (codeForm) {
+      var codeInput = document.getElementById('code-input');
+      if (codeInput) codeInput.focus();
+      codeForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var err = document.getElementById('code-error');
+        if (err) err.hidden = true;
+        var btn = codeForm.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = 'Checking\u2026'; }
+        Store.verifyCode(document.getElementById('code-email').value, codeInput.value)
+          .then(load)
+          .catch(function (ex) {
+            if (btn) { btn.disabled = false; btn.textContent = 'Sign in'; }
+            if (err) { err.textContent = ex.message; err.hidden = false; }
+            codeInput.value = ''; codeInput.focus();
           });
       });
     }
