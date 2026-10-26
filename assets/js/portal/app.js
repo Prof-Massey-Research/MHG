@@ -111,7 +111,7 @@
 
   /* Magic-link sign-in cannot return a session: the person leaves, opens their
      email and comes back. This is the state in between. */
-  /* After the code is sent. Partners type the six digits here rather than
+  /* After the code is sent. Partners type the code here rather than
      following a link: corporate mail scanners click links to vet them, which
      consumes a single-use magic link before the person ever sees it, and they
      are then told it has expired. A code has no URL to scan. */
@@ -120,13 +120,13 @@
     '<div class="portal-gate">' +
       '<p class="eyebrow">Check your email</p>' +
       '<h1>Enter your sign-in code</h1>' +
-      '<p class="muted" style="max-width:46ch">We sent a six-digit code to <strong>' +
+      '<p class="muted" style="max-width:46ch">We sent a code to <strong>' +
         esc(email) + '</strong>. It is valid for one hour.</p>' +
       '<form id="code-form" class="portal-form">' +
-        '<label for="code-input">Six-digit code</label>' +
+        '<label for="code-input">Sign-in code</label>' +
         '<input type="text" id="code-input" name="code" inputmode="numeric" ' +
-          'autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required ' +
-          'placeholder="123456" style="letter-spacing:.35em;font-size:1.1rem">' +
+          'autocomplete="one-time-code" pattern="[0-9]{6,10}" maxlength="10" required ' +
+          'placeholder="12345678" style="letter-spacing:.35em;font-size:1.1rem">' +
         '<input type="hidden" id="code-email" value="' + esc(email) + '">' +
         '<button class="btn" type="submit">Sign in</button>' +
       '</form>' +
@@ -168,8 +168,8 @@
       '<p id="signin-error" class="portal-error" hidden role="alert"></p>' +
       (isMagicLink()
         ? '<div class="portal-note">' +
-            '<p style="margin:0 0 .4rem"><strong>There is no password.</strong> We email you a link ' +
-              'that signs you in.</p>' +
+            '<p style="margin:0 0 .4rem"><strong>There is no password.</strong> We email you a ' +
+              'one-time code.</p>' +
             '<p style="margin:0">The code works once and expires after an hour. Accounts are created by ' +
               'invitation, so use the address your organization was invited with. Nothing about an ' +
               'individual young person should be entered in this portal.</p>' +

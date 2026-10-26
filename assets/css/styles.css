@@ -261,7 +261,10 @@ pre code { background: none; padding: 0; color: inherit; }
 .logo {
   display: block; width: auto;
 }
-.logo--movember { height: 54px; }
+/* The 2026 stacked lockup is much wider than the old mark (3:1 rather than
+   5:3), so the same height made it tower over Susan Crown Exchange. Set by
+   visual weight rather than matching heights. */
+.logo--movember { height: 40px; }
 .logo--sce      { height: 42px; }
 .logo--mcc      { height: 38px; }
 
@@ -300,7 +303,7 @@ pre code { background: none; padding: 0; color: inherit; }
   .hero__logos { justify-content: flex-start; gap: 1.2rem 2.2rem; }
 }
 @media (max-width: 480px) {
-  .logo--movember { height: 44px; }
+  .logo--movember { height: 34px; }
   .logo--sce      { height: 34px; }
   .logo--mcc      { height: 31px; }
   .hstat { grid-template-columns: 1fr; gap: .2rem; }

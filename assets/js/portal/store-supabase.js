@@ -100,7 +100,7 @@
       });
     },
 
-    /* Exchange the six-digit code for a session.
+    /* Exchange the emailed code for a session.
        type must be 'email' for a code. 'magiclink' is for the link form and
        fails against a numeric token with an expired-link error, which is a
        confusing thing to show someone who has just typed the right code. */
@@ -108,7 +108,11 @@
       return Promise.resolve().then(function () {
         var addr = String(email || '').trim();
         var tok  = String(code || '').replace(/\s+/g, '');
-        if (!/^[0-9]{6}$/.test(tok)) throw new Error('Enter the six-digit code from the email.');
+        /* Supabase's OTP length is configurable (6-10 digits) under
+           Authentication -> Sign In / Providers -> Email. Accept any length in
+           that range rather than hard-coding six, so changing the setting does
+           not silently break sign-in. */
+        if (!/^[0-9]{6,10}$/.test(tok)) throw new Error('Enter the code from the email \u2014 digits only.');
         return db().auth.verifyOtp({ email: addr, token: tok, type: 'email' })
           .then(function (res) {
             if (res.error) {
