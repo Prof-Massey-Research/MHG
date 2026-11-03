@@ -145,7 +145,7 @@ window.MHG_CHECKLIST = [
     id: 'g5',
     number: '05',
     title: 'Mental Health Crisis Response Training',
-    statement: 'Youth sport programs require and support mental health crisis response training for organizational leaders who work directly with young people.',
+    statement: 'Youth sport programs require and support mental health crisis response training for organizational leaders.',
     href: 'guidelines/crisis-training.html',
     steps: [
       { id: 'g5s1',
@@ -168,7 +168,8 @@ window.MHG_CHECKLIST = [
     steps: [
       { id: 'g6s1',
         text: 'Identify local mental health resources',
-        note: 'Relationships with local providers, crisis centers and emergency services should exist before a crisis occurs — not be assembled during one.'
+        note: 'Relationships with local providers, crisis centers and emergency services should exist before a crisis occurs — not be assembled during one.',
+        tools: [{ label: 'Mapping Your Referral Network', href: 'toolbox/referral-network.html' }]
       },
       { id: 'g6s2',
         text: 'Make the information easily accessible to families and athletes',

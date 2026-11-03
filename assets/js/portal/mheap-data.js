@@ -65,7 +65,7 @@ window.MHG_MHEAP = {
                  'Local mental health crisis line', 'Local mobile crisis team',
                  'Local hospital with psychiatric ER', 'Campus / school security',
                  'Local police (non-emergency)', 'On-call mental health consultant'],
-          prefill: { 0: '911', 1: 'Call or text 988', 2: 'Text HELP to 741741' } }
+          prefill: { 0: '911', 1: 'Call or text 988 &middot; press 2 for Spanish', 2: 'Text HOME to 741741 &middot; HOLA for Spanish' } }
       ] },
 
     { n: 4, title: 'Emergency Response Procedures',
@@ -297,7 +297,8 @@ window.MHG_MHEAP = {
     closing: 'You are not expected to solve the crisis. You are expected to recognize it, respond appropriately, and connect the athlete to professional help.',
     contacts: [
       { fixed: '911 &mdash; immediate danger' },
-      { fixed: '988 &mdash; Suicide &amp; Crisis Lifeline (call or text)' },
+      { fixed: '988 &mdash; Suicide &amp; Crisis Lifeline (call or text &middot; press 2 for Spanish)' },
+      { fixed: 'Crisis Text Line &mdash; text HOME to 741741 (HOLA for Spanish)' },
       { id: 'card_point_person', label: 'Mental Health Point Person' },
       { id: 'card_crisis_line',  label: 'Local crisis line' }
     ]

@@ -23,14 +23,16 @@ window.MHG_RESOURCES = {
 
   /* Fixed everywhere in the US; rendered as reference, not as inputs. */
   national: [
-    { name: '988 Suicide & Crisis Lifeline', contact: 'Call or text 988',
-      handles: 'Any mental health crisis, 24/7. Free and confidential.' },
-    { name: 'Crisis Text Line', contact: 'Text HOME to 741741',
+    { name: '988 Suicide & Crisis Lifeline', contact: 'Call or text 988 · press 2 for Spanish',
+      handles: 'Any mental health crisis, 24/7. Free and confidential. Interpreters in 240+ languages.' },
+    { name: 'Crisis Text Line', contact: 'Text HOME to 741741 · text HOLA for Spanish',
       handles: 'Crisis support by text, 24/7 — often easier for a young person than a call.' },
-    { name: 'The Trevor Project', contact: '1-866-488-7386 · text START to 678-678',
+    { name: 'The Trevor Project', contact: 'Call 1-866-488-7386 · text START to 678-678',
       handles: 'Crisis support for LGBTQ+ young people, 24/7.' },
+    { name: 'The Steve Fund', contact: 'Text STEVE to 741741',
+      handles: 'Crisis support for young people of color, 24/7.' },
     { name: 'SAMHSA National Helpline', contact: '1-800-662-4357',
-      handles: 'Treatment referral and information, 24/7. Also finds local services.' }
+      handles: 'Free, confidential, multilingual treatment referral, 24/7. Also finds local services.' }
   ],
 
   /* Each group is a fixed set of slots, so every answer has a stable id. */

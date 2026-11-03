@@ -26,7 +26,6 @@
      "introduced" a mental health bill has been introduced, not yet law
      "baseline"   no mental-health-specific law tracked
 
-   Last pulled from the source: see LAST_SYNCED below.
    ========================================================================= */
 window.POLICY_DATA = {
   AK: {
@@ -442,8 +441,6 @@ window.POLICY_DATA = {
     ]
   }
 };
-
-window.POLICY_LAST_SYNCED = "September 2025 (source last updated)";
 
 window.POLICY_BASELINE_NOTE =
   "All 50 states and D.C. require youth-sports concussion protocols \u2014 physical safety is " +

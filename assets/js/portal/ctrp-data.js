@@ -276,7 +276,7 @@ window.MHG_CTRP = {
         { t: 'p', text: 'Dear Families, It is with great sadness that I share [brief factual description of the event, in the words the family has agreed]. Our entire team community is grieving and we are committed to supporting our athletes and families during this difficult time.' },
         { t: 'p', text: '<strong>What we are doing.</strong> Mental health counselors will be available at practice {{counselor_times}}. We are modifying practice schedules to allow time for processing and support. All coaches and staff are prepared to recognize signs of distress. We are coordinating with {{coordinating_org}} to provide comprehensive support.' },
         { t: 'p', text: '<strong>How you can help.</strong> Talk with your child about the event using age-appropriate language. Normalise a wide range of trauma-related reactions. Monitor for changes in behavior, sleep or eating. Reach out to us if you have concerns.' },
-        { t: 'p', text: '<strong>Resources.</strong> 988 Suicide &amp; Crisis Lifeline &mdash; call or text 988. Crisis Text Line &mdash; text HELP to 741741. Local: {{local_resources}}.' },
+        { t: 'p', text: '<strong>Resources.</strong> 988 Suicide &amp; Crisis Lifeline &mdash; call or text 988 (press 2 for Spanish; interpreters in 240+ languages). Crisis Text Line &mdash; text HOME to 741741 (text HOLA for Spanish). Local: {{local_resources}}.' },
         { t: 'p', text: 'We will continue to update you as our support plans develop. Please contact {{letter_contact}} with any questions or concerns.' }
       ] },
 

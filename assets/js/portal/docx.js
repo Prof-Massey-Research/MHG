@@ -114,11 +114,28 @@ window.MHG_DOCX = (function () {
     return out;
   }
 
+  /* Entities reaching the Word writer come from the data files and from page
+     markup, so the set has to cover what those actually use -- &middot; was
+     missing and printed literally as "&middot;" in every export that had one.
+     One pass over the string rather than a chain of replaces: decoding &amp;
+     first and the rest after turns a literal "&mdash;" into an em dash. */
+  var ENT = {
+    amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ',
+    mdash: '—', ndash: '–', middot: '·', hellip: '…',
+    larr: '←', rarr: '→', starf: '★', times: '×', deg: '°',
+    lsquo: '‘', rsquo: '’', ldquo: '“', rdquo: '”'
+  };
+
   function decode(s) {
-    return String(s)
-      .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
-      .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
-      .replace(/&mdash;/g, '—').replace(/&ndash;/g, '–');
+    return String(s).replace(/&(#\d+|#[xX][0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);/g,
+      function (m, e) {
+        if (e.charAt(0) === '#') {
+          var n = (e.charAt(1) === 'x' || e.charAt(1) === 'X')
+            ? parseInt(e.slice(2), 16) : parseInt(e.slice(1), 10);
+          return isNaN(n) ? m : String.fromCharCode(n);
+        }
+        return Object.prototype.hasOwnProperty.call(ENT, e) ? ENT[e] : m;
+      });
   }
 
   function p(style, content, extra) {
