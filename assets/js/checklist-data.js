@@ -169,7 +169,8 @@ window.MHG_CHECKLIST = [
       { id: 'g6s1',
         text: 'Identify local mental health resources',
         note: 'Relationships with local providers, crisis centers and emergency services should exist before a crisis occurs — not be assembled during one.',
-        tools: [{ label: 'Mapping Your Referral Network', href: 'toolbox/referral-network.html' }]
+        tools: [{ label: 'Mapping Your Referral Network', href: 'toolbox/referral-network.html' },
+                { label: 'Provider List Template (Excel)', href: 'assets/files/youth-mental-health-provider-list.xlsx', download: true }]
       },
       { id: 'g6s2',
         text: 'Make the information easily accessible to families and athletes',

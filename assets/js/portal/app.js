@@ -345,7 +345,10 @@
                esc(t.resource) + '">' + label + '</button>';
       }
       if (!t.href) return '';
-      return '<a class="step__tool" href="' + esc(t.href) + '">' + esc(t.label) + '</a>';
+      /* A file (t.download) saves rather than opens; a spreadsheet opened in
+         the tab would just leave the partner on a blank page. */
+      return '<a class="step__tool" href="' + esc(t.href) + '"' + (t.download ? ' download' : '') + '>' +
+             esc(t.label) + '</a>';
     }).join('');
     if (!links) return '';
     return '<div class="ck-item__tools">' + links + '</div>';
