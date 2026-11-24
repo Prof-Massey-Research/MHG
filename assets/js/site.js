@@ -115,6 +115,20 @@
     });
   });
 
+  /* --- home stats: four of six on phones ------------------------------- */
+  /* Marks two stats at random on each visit; CSS hides the marked ones only at
+     phone width, so tablets and computers keep all six and a phone turned
+     sideways gets them back. Without JS nothing is marked and all six show. */
+  var hstats = document.querySelectorAll('.hero__stats .hstat');
+  if (hstats.length > 4) {
+    var order = Array.prototype.slice.call(hstats);
+    for (var i = order.length - 1; i > 0; i--) {     /* Fisher-Yates shuffle */
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = order[i]; order[i] = order[j]; order[j] = t;
+    }
+    order.slice(4).forEach(function (el) { el.classList.add('hstat--phone-hide'); });
+  }
+
   /* --- print buttons ---------------------------------------------------- */
   document.addEventListener('click', function (e) {
     if (e.target.closest('[data-print]')) { e.preventDefault(); window.print(); }
