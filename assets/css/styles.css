@@ -186,11 +186,6 @@ pre code { background: none; padding: 0; color: inherit; }
 .submenu a[aria-current="page"] { color: var(--ink); font-weight: 650; }
 .submenu a[aria-current="page"]::after { display: none; }
 .submenu__no { flex: 0 0 1.35rem; font-size: .76rem; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
-.submenu li:first-child a {
-  font-weight: 650; color: var(--ink);
-  border-bottom: 1px solid var(--line); border-radius: 2px 2px 0 0;
-  margin-bottom: .3rem; padding-bottom: .6rem;
-}
 
 .nav-toggle {
   display: none; margin-left: auto; background: none; border: 1px solid var(--line-mid);
@@ -222,7 +217,6 @@ pre code { background: none; padding: 0; color: inherit; }
     border: 0; border-bottom: 1px solid var(--line);
     border-radius: 0; box-shadow: none; background: none;
   }
-  .submenu li:first-child a { border-bottom: 0; margin-bottom: 0; }
   .tabs a[aria-current="page"]::after { display: none; }
   .tabs a[aria-current="page"] { text-decoration: underline; text-underline-offset: .25em; }
 }
@@ -614,6 +608,9 @@ a.card:hover { border-color: var(--ink); transform: translateY(-2px); }
 @media (max-width: 1040px) { .rungs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 760px)  { .rungs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 520px)  { .rungs { grid-template-columns: 1fr; } }
+/* Five steps in three or two columns leave one slot empty, which showed as a
+   grey square; the last step widens to fill it. */
+@media (max-width: 1040px) and (min-width: 521px) { .rung:last-child { grid-column: span 2; } }
 .rung__no { font-family: var(--serif); font-size: .95rem; color: var(--ink-faint); }
 .rung h3 { margin: .35rem 0 .5rem; }
 .rung p { font-size: .9rem; color: var(--ink-soft); margin: 0; }
